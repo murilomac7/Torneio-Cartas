@@ -1,0 +1,162 @@
+﻿main {
+    height: calc(100vh - 100px) !important;
+}
+
+.results {
+    height: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.lines {
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+}
+
+.right-key .quartas .lines {
+    border-left: 3px solid white;
+    z-index: -1;
+}
+
+.left-key .quartas .lines {
+    border-right: 3px solid white;
+    z-index: -1;
+}
+
+.right-key .semi .lines {
+    height: 50%;
+    border-left: 3px solid white;
+    z-index: -1;
+}
+
+.left-key .semi .lines {
+    height: 50%;
+    border-right: 3px solid white;
+    z-index: -1;
+}
+
+.fighter-card-winner {
+    font-family: 'Futura Display BQ', Arial;
+    border-radius: 10px;
+    height: auto;
+    position: relative;
+}
+
+.oitavas .row{
+    height: 25%;
+    align-items: center;
+}
+
+.quartas .row{
+    height: 50%;
+    align-items: center;
+}
+
+.semi .row{
+    height: 100%;
+    align-items: center;
+}
+
+.center-key .row{
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.oitavas .fighter-square {
+    height: 48px;
+    width: 48px;
+    background-color: #FF0404;
+    border-radius: 10px;
+}
+
+.quartas .fighter-square {
+    height: 56px;
+    width: 56px;
+    background-color: #FF0404;
+    border-radius: 10px;
+}
+
+.semi .fighter-square {
+    height: 64px;
+    width: 64px;
+    background-color: #FF0404;
+    border-radius: 10px;
+}
+
+.final .fighter-square {
+    height: 72px;
+    width: 72px;
+    background-color: #FF0404;
+    border-radius: 10px;
+}
+
+.fighter-square img {
+    border-radius: 10px;
+}
+
+.oitavas .fighter-square img {
+    height: 48px;
+    width: 48px;
+}
+
+.quartas .fighter-square img {
+    height: 56px;
+    width: 56px;
+}
+
+.semi .fighter-square img {
+    height: 64px;
+    width: 64px;
+}
+
+.final .fighter-square img {
+    height: 72px;
+    width: 72px;
+}
+
+.center-key .fighter-card{
+    width: 300px;
+}
+
+.fighter-winner {
+    width: 300px;
+    height: 70px;
+    background-color: #FF0404;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+}
+
+.fight-again-btn {
+    width: 250px;
+    height: 50px;
+    background-color: #FFFF00;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#loading {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: darkorange;
+    z-index: 99;
+}

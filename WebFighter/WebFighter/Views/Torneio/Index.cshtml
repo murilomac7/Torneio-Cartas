@@ -1,0 +1,195 @@
+﻿@model IEnumerable<WebFighter.Models.LutadorViewModel>
+
+<link rel="stylesheet" type="text/css" href="~/css/layout/index.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+<div class="position-relative">
+
+    <div class="row my-3 position-relative" style="justify-content: center; align-items: center">
+        <h5 class="text-white" id="count">Selecione 16 lutadores para começar o torneio</h5>
+        <button id="start" class="btn-start btn d-none">Iniciar Torneio</button>
+    </div>
+
+    <button id="random" class="btn-random btn"><img src="~/img/Logo/Random.png" /></button>
+
+    <div class="carousel-container position-relative">
+        @foreach (var item in Model)
+        {
+            <div class="fighter-card" id="@item.Id" data-id="@item.Id">
+                <div class="fighter-card-header">
+                    <div class="fighter-id">
+                        @item.Id
+                    </div>
+                    <div class="fighter-select" onclick="SelectLutadores(@item.Id)" data-btn-id="@item.Id">
+                        <div class="select-display" id="select-@item.Id" data-selectID="@item.Id"></div>
+                    </div>
+                    @{ var imagePath = "/img/Fighters/" + item.Id + ".png";}
+                    <img src="@imagePath" />
+                </div>
+                <div class="fighter-card-body mt-2">
+                    <div class="fighter-name mb-2">
+                        @item.Nome
+                    </div>
+                    <div class="fighter-atributes">
+                        <div class="atribute-name">Idade</div>
+                        <div class="atribute-value">@item.Idade</div>
+                    </div>
+                    <div class="fighter-atributes">
+                        <div class="atribute-name">Estilos</div>
+                        <div class="atribute-value">@item.ArtesMarciais</div>
+                    </div>
+                    <div class="fighter-atributes">
+                        <div class="atribute-name">Lutas</div>
+                        <div class="atribute-value">@item.Lutas</div>
+                    </div>
+                    <div class="fighter-atributes">
+                        <div class="atribute-name">Vitórias</div>
+                        <div class="atribute-value">@item.Vitorias</div>
+                    </div>
+                    <div class="fighter-atributes">
+                        <div class="atribute-name">Derrotas</div>
+                        <div class="atribute-value">@item.Derrotas</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="carousel-buttons">
+        <img class="prev nav-button" src="~/img/Logo/Arrow-removebg-preview.png" />
+        <img class="next nav-button" src="~/img/Logo/Arrow-removebg-preview.png" />
+    </div>
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('.main-header').addClass('shrink');
+        }, 1000);
+    });
+
+    let _lutadoresSelecionados = [];
+    let _countLutadores = 16;
+    var _btnIniciar = $("#start");
+    var _contador = $("#count");
+    var _random = $("#random");
+
+    var _iniciarTorneio = "@Url.Action("IniciarTorneio", "Torneio")";
+
+    $('.carousel-container').slick({
+        centerMode: true,
+        slidesToShow: 3,
+        prevArrow: $('.prev'),
+        nextArrow: $('.next'),
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+</script>
+<script type="text/javascript">
+
+    function clearSelectors() {
+        var cards = $('.fighter-card.selected');
+        var selectors = $('.select-display.selected');
+
+        cards.removeClass('selected');
+        selectors.removeClass('selected');
+
+        _countLutadores = 16;
+    }
+
+    function SelectLutadores(id) {
+        var cards = $("[data-id='" + id + "']");
+        var selectors = $("[data-selectID='" + id + "']");
+
+        if (selectors.hasClass('selected')) {
+            _countLutadores++;
+
+            if (_countLutadores > 0) {
+                _btnIniciar.addClass('d-none');
+                _contador.removeClass('d-none');
+            }
+
+            selectors.removeClass('selected');
+            cards.removeClass('selected');
+        } else {
+            _countLutadores--;
+
+            if (_countLutadores == 0) {
+                _btnIniciar.removeClass('d-none');
+                _contador.addClass('d-none');
+                selectors.addClass('selected');
+                cards.addClass('selected');
+                return;
+            }
+            if (_countLutadores < 0) {
+                _countLutadores++;
+                return;
+            }
+
+            selectors.addClass('selected');
+            cards.addClass('selected');
+        }
+
+        _contador.text('Selecione mais ' + _countLutadores + ' lutadores para iniciar o torneio');
+    }
+
+    function getLutadores() {
+        $('.fighter-card.selected').each(function () {
+            if ($(this).attr('id') != undefined)
+                _lutadoresSelecionados.push($(this).attr('id'));
+        });
+    }
+
+    _btnIniciar.click(function () {
+        _lutadoresSelecionados.splice(0, _lutadoresSelecionados.length);
+
+        getLutadores();
+
+        $.ajax({
+            type: 'POST',
+            url: _iniciarTorneio,
+            data: { lutadoresSelecionados: _lutadoresSelecionados.toString() },
+            success(data) { window.location = data.url },
+            error: function (xhr, error, code) {
+                alert(xhr);
+                alert(code);
+            },
+        });
+    });
+
+    _random.click(function () {
+        clearSelectors();
+
+        var arr = [];
+        while (arr.length < 16) {
+            var r = Math.floor(Math.random() * 32) + 1;
+            if (arr.indexOf(r) === -1) arr.push(r);
+        }
+
+        for (let i = 0; i < arr.length; i++) {
+            SelectLutadores(arr[i]);
+        }
+    })
+</script>

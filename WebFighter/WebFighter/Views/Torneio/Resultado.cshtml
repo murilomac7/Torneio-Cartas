@@ -1,0 +1,226 @@
+﻿@model TorneioViewModel
+
+<link rel="stylesheet" href="~/css/layout/resultado.css" />
+<div class="row results justify-content-center">
+    <div class="col-4 row d-none d-lg-flex left-key">
+        <div class="oitavas col-4">
+            @for (int i = 0; i < 8; i += 2)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="fighter-square mb-1" id="@Model.ChaveamentoOitavas[i].Id">
+                            @{ var img_lutadorOitavas1 = "/img/Fighters/" + Model.ChaveamentoOitavas[i].Id + ".png";}
+                            <img src="@img_lutadorOitavas1" />
+                        </div>
+                        <div class="fighter-square mt-1" id="@Model.ChaveamentoOitavas[i + 1].Id">
+                            @{ var img_lutadorOitavas2 = "/img/Fighters/" + Model.ChaveamentoOitavas[i + 1].Id + ".png";}
+                            <img src="@img_lutadorOitavas2" />
+                        </div>
+                    </div>
+                    <div class="col row lines"></div>
+                </div>
+            }
+        </div>
+        <div class="quartas col-4">
+            @for (int i = 0; i < 4; i += 2)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="fighter-square mb-5" id="@Model.ChaveamentoQuartas[i].Id">
+                            @{ var img_lutadorQuartas1 = "/img/Fighters/" + Model.ChaveamentoQuartas[i].Id + ".png";}
+                            <img src="@img_lutadorQuartas1" />
+                        </div>
+                        <div class="fighter-square mt-5" id="@Model.ChaveamentoQuartas[i + 1].Id">
+                            @{ var img_lutadorQuartas2 = "/img/Fighters/" + Model.ChaveamentoQuartas[i + 1].Id + ".png";}
+                            <img src="@img_lutadorQuartas2" />
+                        </div>
+                    </div>
+                    <div class="col row lines"></div>
+                </div>
+            }
+        </div>
+        <div class="semi col-4">
+            <div class="row">
+                <div class="col-1" style="height: 100%">
+                    <div class="row" style="height: 50%; align-items: center;">
+                        <div class="fighter-square" id="@Model.ChaveamentoSemiFinal[0].Id">
+                            @{ var img_lutadorSemi1 = "/img/Fighters/" + Model.ChaveamentoSemiFinal[0].Id + ".png";}
+                            <img src="@img_lutadorSemi1" />
+                        </div>
+                    </div>
+                    <div class="row" style="height: 50%; align-items: center;">
+                        <div class="fighter-square" id="@Model.ChaveamentoSemiFinal[1].Id">
+                            @{ var img_lutadorSemi2 = "/img/Fighters/" + Model.ChaveamentoSemiFinal[1].Id + ".png";}
+                            <img src="@img_lutadorSemi2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7 row lines"></div>
+                <div class="col-5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4 center-key">
+        <div class="row">
+            <div class="fighter-card-winner" id="@Model.Vencedor.Id">
+                <div class="fighter-name mb-2">
+                    @Model.Vencedor.Nome
+                </div>
+                <div class="fighter-card-header">
+                    @{ var imagePath = "/img/Fighters/" + Model.Vencedor.Id + ".png";}
+                    <img src="@imagePath" />
+                </div>
+                <div class="fighter-winner">
+                    VENCEDOR
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-4 final">
+                <div class="row align-items-center" style="justify-content: right;">
+                    <div class="fighter-square" id="@Model.ChaveamentoFinal[0].Id">
+                        @{ var img_lutadorFinalista1 = "/img/Fighters/" + Model.ChaveamentoFinal[0].Id + ".png";}
+                        <img src="@img_lutadorFinalista1" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row justify-content-center align-items-center">
+                    <img src="~/img/Logo/Versus.png" height="100" width="100" />
+                </div>
+            </div>
+            <div class="col-4 final">
+                <div class="row align-items-center" style="justify-content: left">
+                    <div class="fighter-square" id="@Model.ChaveamentoFinal[1].Id">
+                        @{ var img_lutadorFinalista2 = "/img/Fighters/" + Model.ChaveamentoFinal[1].Id + ".png";}
+                        <img src="@img_lutadorFinalista2" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <a class="fight-again-btn btn" asp-action="Index" asp-controller="Torneio">
+                Lutar Novamente
+            </a>
+        </div>
+    </div>
+
+    <div class="col-4 row d-none d-lg-flex right-key">
+        <div class="semi col-4">
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-7 row lines"></div>
+                <div class="col-1" style="height: 100%">
+                    <div class="row align-items-center" style="height: 50%; justify-content: right">
+                        <div class="fighter-square" id="@Model.ChaveamentoSemiFinal[2].Id">
+                            @{ var img_lutadorSemi3 = "/img/Fighters/" + Model.ChaveamentoSemiFinal[2].Id + ".png";}
+                            <img src="@img_lutadorSemi3" />
+                        </div>
+                    </div>
+                    <div class="row align-items-center" style="height: 50%; justify-content: right">
+                        <div class="fighter-square" id="@Model.ChaveamentoSemiFinal[3].Id">
+                            @{ var img_lutadorSemi4 = "/img/Fighters/" + Model.ChaveamentoSemiFinal[3].Id + ".png";}
+                            <img src="@img_lutadorSemi4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="quartas col-4">
+            @for (int i = 4; i < 8; i += 2)
+            {
+                <div class="row">
+                    <div class="col row lines"></div>
+                    <div class="col">
+                        <div class="fighter-square mb-5 ml-auto" id="@Model.ChaveamentoQuartas[i].Id">
+                            @{ var img_lutadorQuartas2 = "/img/Fighters/" + Model.ChaveamentoQuartas[i].Id + ".png";}
+                            <img src="@img_lutadorQuartas2" />
+                        </div>
+                        <div class="fighter-square mt-5 ml-auto" id="@Model.ChaveamentoQuartas[i + 1].Id">
+                            @{ var img_lutadorQuartas3 = "/img/Fighters/" + Model.ChaveamentoQuartas[i + 1].Id + ".png";}
+                            <img src="@img_lutadorQuartas3" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="oitavas col-4">
+            @for (int i = 8; i < 16; i += 2)
+            {
+                <div class="row">
+                    <div class="col row lines"></div>
+                    <div class="col">
+                        <div class="fighter-square mb-1 ml-auto" id="@Model.ChaveamentoOitavas[i].Id">
+                            @{ var img_lutadorOitavas3 = "/img/Fighters/" + Model.ChaveamentoOitavas[i].Id + ".png";}
+                            <img src="@img_lutadorOitavas3" />
+                        </div>
+                        <div class="fighter-square mt-1 ml-auto" id="@Model.ChaveamentoOitavas[i + 1].Id">
+                            @{ var img_lutadorOitavas4 = "/img/Fighters/" + Model.ChaveamentoOitavas[i + 1].Id + ".png";}
+                            <img src="@img_lutadorOitavas4" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="loading">
+    <img id="loading-image" src="~/img/Logo/Versus-2-gif.gif" alt="Loading..." />
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script>
+    $(window).on('load', function () {
+        setTimeout(function () {
+            $('#loading').hide();
+        }, 3000);        
+    })
+</script>
+
+<script type="text/javascript">
+    var _fightersCardsOitavas = $(".oitavas .fighter-square");
+    var _fightersCardsQuartas = $(".quartas .fighter-square");
+    var _fightersCardsSemi = $(".semi .fighter-square");
+    var _fightersCardsFinal = $(".final .fighter-square");
+    var _allCards = $(".fighter-square");
+    var _vencedor = $(".fighter-card-winner");
+
+    $(document).ready(function () {
+        _fightersCardsOitavas.each(function () {
+            var countQuartas = $(".quartas div#" + $(this).attr('id') + ".fighter-square").length;
+            if (countQuartas > 0) {
+                $(this).css("background-color", "#FFFF00");
+            }
+        });
+
+        _fightersCardsQuartas.each(function () {
+            var countSemi = $(".semi div#" + $(this).attr('id') + ".fighter-square").length;
+            if (countSemi > 0) {
+                $(this).css("background-color", "#FFFF00");
+            }
+        });
+
+        _fightersCardsSemi.each(function () {
+            var countFinal = $(".final div#" + $(this).attr('id') + ".fighter-square").length;
+            if (countFinal > 0) {
+                $(this).css("background-color", "#FFFF00");
+            }
+        });
+
+        _fightersCardsFinal.each(function () {
+            if ($(this).attr('id') == _vencedor.attr('id')) {
+                $(this).css("background-color", "#FFFF00");
+            }
+        });
+
+        //_allCards.each(function () {
+        //    if ($(this).attr('id') != _vencedor.attr('id')) {
+        //        $(this).css("opacity", "50%");
+        //    }
+        //})
+    });
+</script>

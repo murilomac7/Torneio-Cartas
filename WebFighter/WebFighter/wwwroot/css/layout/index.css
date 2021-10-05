@@ -1,0 +1,24 @@
+﻿.main-header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 99;
+    transition: height 1s ease-in-out;
+}
+
+.main-header.shrink {
+    height: 150px;
+    position: relative;
+}
+
+.main-header img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
