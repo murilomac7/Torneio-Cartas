@@ -44,3 +44,22 @@ INSERT INTO Lutadores (nome, idade, artes_marciais, total_lutas, vitorias, derro
 INSERT INTO Lutadores (nome, idade, artes_marciais, total_lutas, vitorias, derrotas) values ('Rex', 17, 1, 6, 2, 4)
 INSERT INTO Lutadores (nome, idade, artes_marciais, total_lutas, vitorias, derrotas) values ('Mulher-Maravilha', 34, 2, 10, 5, 5)
 INSERT INTO Lutadores (nome, idade, artes_marciais, total_lutas, vitorias, derrotas) values ('Chapolin', 20, 1, 4, 2, 2)
+
+go
+Create procedure AtualizarLutador(
+	@Id int,
+	@TotalLutas int, 
+	@Vitorias int, 
+	@Derrotas int
+)
+as begin
+update Lutadores set total_lutas = @TotalLutas, vitorias = @Vitorias, derrotas = @Derrotas where id = @Id
+end
+
+go
+Create procedure BuscarLutadorPorID(
+	@Id int
+)
+as begin
+select * from Lutadores where id = @Id
+end
